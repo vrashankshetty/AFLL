@@ -2,6 +2,7 @@ import ply.lex as lex
 
 tokens = (
     'EQUALS',
+    'CLASSNAME',
     'ID',
     'RIGHTBRACE',
     'LEFTBRACE',
@@ -11,7 +12,12 @@ tokens = (
 
 
 def t_NEW(t):
-    r'\b(int|void|char|double|string|bool|float|long|short)\b'
+    r'new'
+    return t
+
+
+def t_CLASSNAME(t):
+    r'\b([A-Z_][a-zA-Z_0-9]*)\b'
     return t
 
 
@@ -19,13 +25,15 @@ def t_ID(t):
     r'\b([a-zA-Z_][a-zA-Z_0-9]*)\b'
     return t
 
+
 t_LEFTBRACE = r'\('
 t_RIGHTBRACE = r'\)'
 
 
 def t_EQUALS(t):
-    r'\b=\b'
+    r'='
     return t
+
 
 def t_SEMICOLON(t):
     r';'

@@ -5,7 +5,7 @@ flag = 0
 
 def p_declaration(p):
     '''
-    declaration : ID EQUALS NEW LEFTBRACE RIGHTBRACE SEMICOLON
+    declaration : CLASSNAME ID EQUALS NEW CLASSNAME LEFTBRACE RIGHTBRACE SEMICOLON
     '''
     p[0] = ('declaration', p[1], p[3])
 
@@ -14,9 +14,10 @@ def p_error(p):
     global flag 
     flag = 1
 
+
 parser = yacc.yacc()
 
-print("Welcome, You are entering for array declaration")
+print("Welcome, You are entering for object declaration")
 
 while True:
    flag = 0

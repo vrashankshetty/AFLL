@@ -100,8 +100,7 @@ def p_error(p):
     flag = 1
 
 
-#From here, just copy paste and change the input statement for every other construct
-#Don't forget to globally declare flag and also make flag 1 at error 
+print("Welcome,You are entering for loop declaration")
 parser = yacc.yacc()
 while True:
    flag = 0

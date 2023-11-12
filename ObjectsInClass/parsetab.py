@@ -6,9 +6,9 @@ _tabversion = '3.10'
 
 _lr_method = 'LALR'
 
-_lr_signature = 'EQUALS ID LEFTBRACE NEW RIGHTBRACE SEMICOLON\n    declaration : ID EQUALS NEW LEFTBRACE RIGHTBRACE SEMICOLON\n    '
+_lr_signature = 'CLASSNAME EQUALS ID LEFTBRACE NEW RIGHTBRACE SEMICOLON\n    declaration : CLASSNAME ID EQUALS NEW CLASSNAME LEFTBRACE RIGHTBRACE SEMICOLON\n    '
     
-_lr_action_items = {'ID':([0,],[2,]),'$end':([1,7,],[0,-1,]),'EQUALS':([2,],[3,]),'NEW':([3,],[4,]),'LEFTBRACE':([4,],[5,]),'RIGHTBRACE':([5,],[6,]),'SEMICOLON':([6,],[7,]),}
+_lr_action_items = {'CLASSNAME':([0,5,],[2,6,]),'$end':([1,9,],[0,-1,]),'ID':([2,],[3,]),'EQUALS':([3,],[4,]),'NEW':([4,],[5,]),'LEFTBRACE':([6,],[7,]),'RIGHTBRACE':([7,],[8,]),'SEMICOLON':([8,],[9,]),}
 
 _lr_action = {}
 for _k, _v in _lr_action_items.items():
@@ -27,5 +27,5 @@ for _k, _v in _lr_goto_items.items():
 del _lr_goto_items
 _lr_productions = [
   ("S' -> declaration","S'",1,None,None,None),
-  ('declaration -> ID EQUALS NEW LEFTBRACE RIGHTBRACE SEMICOLON','declaration',6,'p_declaration','parser.py',8),
+  ('declaration -> CLASSNAME ID EQUALS NEW CLASSNAME LEFTBRACE RIGHTBRACE SEMICOLON','declaration',8,'p_declaration','parser.py',8),
 ]

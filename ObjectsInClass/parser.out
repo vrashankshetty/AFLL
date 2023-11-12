@@ -1,0 +1,79 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> declaration
+Rule 1     declaration -> ID EQUALS NEW LEFTBRACE RIGHTBRACE SEMICOLON
+
+Terminals, with rules where they appear
+
+EQUALS               : 1
+ID                   : 1
+LEFTBRACE            : 1
+NEW                  : 1
+RIGHTBRACE           : 1
+SEMICOLON            : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+declaration          : 0
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . declaration
+    (1) declaration -> . ID EQUALS NEW LEFTBRACE RIGHTBRACE SEMICOLON
+
+    ID              shift and go to state 2
+
+    declaration                    shift and go to state 1
+
+state 1
+
+    (0) S' -> declaration .
+
+
+
+state 2
+
+    (1) declaration -> ID . EQUALS NEW LEFTBRACE RIGHTBRACE SEMICOLON
+
+    EQUALS          shift and go to state 3
+
+
+state 3
+
+    (1) declaration -> ID EQUALS . NEW LEFTBRACE RIGHTBRACE SEMICOLON
+
+    NEW             shift and go to state 4
+
+
+state 4
+
+    (1) declaration -> ID EQUALS NEW . LEFTBRACE RIGHTBRACE SEMICOLON
+
+    LEFTBRACE       shift and go to state 5
+
+
+state 5
+
+    (1) declaration -> ID EQUALS NEW LEFTBRACE . RIGHTBRACE SEMICOLON
+
+    RIGHTBRACE      shift and go to state 6
+
+
+state 6
+
+    (1) declaration -> ID EQUALS NEW LEFTBRACE RIGHTBRACE . SEMICOLON
+
+    SEMICOLON       shift and go to state 7
+
+
+state 7
+
+    (1) declaration -> ID EQUALS NEW LEFTBRACE RIGHTBRACE SEMICOLON .
+
+    $end            reduce using rule 1 (declaration -> ID EQUALS NEW LEFTBRACE RIGHTBRACE SEMICOLON .)
+

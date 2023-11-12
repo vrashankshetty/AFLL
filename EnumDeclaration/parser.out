@@ -1,0 +1,137 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> declaration
+Rule 1     declaration -> KEYWORD LFLOWER list RFLOWER
+Rule 2     list -> exp COMMA list
+Rule 3     list -> exp
+Rule 4     list -> <empty>
+Rule 5     exp -> ID EQUALS NUMBER
+Rule 6     exp -> ID
+
+Terminals, with rules where they appear
+
+COMMA                : 2
+EQUALS               : 5
+ID                   : 5 6
+KEYWORD              : 1
+LFLOWER              : 1
+NUMBER               : 5
+RFLOWER              : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+declaration          : 0
+exp                  : 2 3
+list                 : 1 2
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . declaration
+    (1) declaration -> . KEYWORD LFLOWER list RFLOWER
+
+    KEYWORD         shift and go to state 2
+
+    declaration                    shift and go to state 1
+
+state 1
+
+    (0) S' -> declaration .
+
+
+
+state 2
+
+    (1) declaration -> KEYWORD . LFLOWER list RFLOWER
+
+    LFLOWER         shift and go to state 3
+
+
+state 3
+
+    (1) declaration -> KEYWORD LFLOWER . list RFLOWER
+    (2) list -> . exp COMMA list
+    (3) list -> . exp
+    (4) list -> .
+    (5) exp -> . ID EQUALS NUMBER
+    (6) exp -> . ID
+
+    RFLOWER         reduce using rule 4 (list -> .)
+    ID              shift and go to state 6
+
+    list                           shift and go to state 4
+    exp                            shift and go to state 5
+
+state 4
+
+    (1) declaration -> KEYWORD LFLOWER list . RFLOWER
+
+    RFLOWER         shift and go to state 7
+
+
+state 5
+
+    (2) list -> exp . COMMA list
+    (3) list -> exp .
+
+    COMMA           shift and go to state 8
+    RFLOWER         reduce using rule 3 (list -> exp .)
+
+
+state 6
+
+    (5) exp -> ID . EQUALS NUMBER
+    (6) exp -> ID .
+
+    EQUALS          shift and go to state 9
+    COMMA           reduce using rule 6 (exp -> ID .)
+    RFLOWER         reduce using rule 6 (exp -> ID .)
+
+
+state 7
+
+    (1) declaration -> KEYWORD LFLOWER list RFLOWER .
+
+    $end            reduce using rule 1 (declaration -> KEYWORD LFLOWER list RFLOWER .)
+
+
+state 8
+
+    (2) list -> exp COMMA . list
+    (2) list -> . exp COMMA list
+    (3) list -> . exp
+    (4) list -> .
+    (5) exp -> . ID EQUALS NUMBER
+    (6) exp -> . ID
+
+    RFLOWER         reduce using rule 4 (list -> .)
+    ID              shift and go to state 6
+
+    exp                            shift and go to state 5
+    list                           shift and go to state 10
+
+state 9
+
+    (5) exp -> ID EQUALS . NUMBER
+
+    NUMBER          shift and go to state 11
+
+
+state 10
+
+    (2) list -> exp COMMA list .
+
+    RFLOWER         reduce using rule 2 (list -> exp COMMA list .)
+
+
+state 11
+
+    (5) exp -> ID EQUALS NUMBER .
+
+    COMMA           reduce using rule 5 (exp -> ID EQUALS NUMBER .)
+    RFLOWER         reduce using rule 5 (exp -> ID EQUALS NUMBER .)
+

@@ -1,0 +1,136 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Grammar
+
+Rule 0     S' -> declaration
+Rule 1     declaration -> DTYPE LEFTBRACE multiple RIGHTBRACE list SEMICOLON
+Rule 2     list -> ID COMMA list
+Rule 3     list -> ID
+Rule 4     multiple -> COMMA multiple
+Rule 5     multiple -> <empty>
+
+Terminals, with rules where they appear
+
+COMMA                : 2 4
+DTYPE                : 1
+ID                   : 2 3
+LEFTBRACE            : 1
+RIGHTBRACE           : 1
+SEMICOLON            : 1
+error                : 
+
+Nonterminals, with rules where they appear
+
+declaration          : 0
+list                 : 1 2
+multiple             : 1 4
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . declaration
+    (1) declaration -> . DTYPE LEFTBRACE multiple RIGHTBRACE list SEMICOLON
+
+    DTYPE           shift and go to state 2
+
+    declaration                    shift and go to state 1
+
+state 1
+
+    (0) S' -> declaration .
+
+
+
+state 2
+
+    (1) declaration -> DTYPE . LEFTBRACE multiple RIGHTBRACE list SEMICOLON
+
+    LEFTBRACE       shift and go to state 3
+
+
+state 3
+
+    (1) declaration -> DTYPE LEFTBRACE . multiple RIGHTBRACE list SEMICOLON
+    (4) multiple -> . COMMA multiple
+    (5) multiple -> .
+
+    COMMA           shift and go to state 5
+    RIGHTBRACE      reduce using rule 5 (multiple -> .)
+
+    multiple                       shift and go to state 4
+
+state 4
+
+    (1) declaration -> DTYPE LEFTBRACE multiple . RIGHTBRACE list SEMICOLON
+
+    RIGHTBRACE      shift and go to state 6
+
+
+state 5
+
+    (4) multiple -> COMMA . multiple
+    (4) multiple -> . COMMA multiple
+    (5) multiple -> .
+
+    COMMA           shift and go to state 5
+    RIGHTBRACE      reduce using rule 5 (multiple -> .)
+
+    multiple                       shift and go to state 7
+
+state 6
+
+    (1) declaration -> DTYPE LEFTBRACE multiple RIGHTBRACE . list SEMICOLON
+    (2) list -> . ID COMMA list
+    (3) list -> . ID
+
+    ID              shift and go to state 9
+
+    list                           shift and go to state 8
+
+state 7
+
+    (4) multiple -> COMMA multiple .
+
+    RIGHTBRACE      reduce using rule 4 (multiple -> COMMA multiple .)
+
+
+state 8
+
+    (1) declaration -> DTYPE LEFTBRACE multiple RIGHTBRACE list . SEMICOLON
+
+    SEMICOLON       shift and go to state 10
+
+
+state 9
+
+    (2) list -> ID . COMMA list
+    (3) list -> ID .
+
+    COMMA           shift and go to state 11
+    SEMICOLON       reduce using rule 3 (list -> ID .)
+
+
+state 10
+
+    (1) declaration -> DTYPE LEFTBRACE multiple RIGHTBRACE list SEMICOLON .
+
+    $end            reduce using rule 1 (declaration -> DTYPE LEFTBRACE multiple RIGHTBRACE list SEMICOLON .)
+
+
+state 11
+
+    (2) list -> ID COMMA . list
+    (2) list -> . ID COMMA list
+    (3) list -> . ID
+
+    ID              shift and go to state 9
+
+    list                           shift and go to state 12
+
+state 12
+
+    (2) list -> ID COMMA list .
+
+    SEMICOLON       reduce using rule 2 (list -> ID COMMA list .)
+

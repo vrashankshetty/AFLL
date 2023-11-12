@@ -1,0 +1,802 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COMMA
+
+Grammar
+
+Rule 0     S' -> for_statement
+Rule 1     for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+Rule 2     for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement
+Rule 3     initialization -> DTYPE ID EQUALS NUMBER
+Rule 4     initialization -> <empty>
+Rule 5     conditions -> ID EQUALS data
+Rule 6     conditions -> ID GREATER data
+Rule 7     conditions -> ID LESSER data
+Rule 8     conditions -> ID GREATER EQUALS data
+Rule 9     conditions -> ID LESSER EQUALS data
+Rule 10    conditions -> ID NOT EQUALS data
+Rule 11    conditions -> conditions AND conditions
+Rule 12    conditions -> conditions OR conditions
+Rule 13    conditions -> data
+Rule 14    conditions -> <empty>
+Rule 15    data -> ID
+Rule 16    data -> NUMBER
+Rule 17    iteration -> ID EQUALS ID PLUS NUMBER
+Rule 18    iteration -> ID EQUALS ID MINUS NUMBER
+Rule 19    iteration -> ID EQUALS ID MUL NUMBER
+Rule 20    iteration -> ID EQUALS ID DIV NUMBER
+Rule 21    iteration -> ID SHORTHAND
+Rule 22    iteration -> <empty>
+Rule 23    statements -> statements statement
+Rule 24    statements -> statement
+Rule 25    statement -> list SEMICOLON
+Rule 26    statement -> for_statement
+Rule 27    statement -> empty
+Rule 28    singleStatement -> list SEMICOLON
+Rule 29    singleStatement -> empty
+Rule 30    singleStatement -> for_statement
+Rule 31    list -> ID list
+Rule 32    list -> ID
+Rule 33    empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 11
+COMMA                : 
+DIV                  : 20
+DTYPE                : 3
+EQUALS               : 3 5 8 9 10 17 18 19 20
+FOR                  : 1 2
+GREATER              : 6 8
+ID                   : 3 5 6 7 8 9 10 15 17 17 18 18 19 19 20 20 21 31 32
+LBRACE               : 1 2
+LESSER               : 7 9
+LFLOWER              : 1
+MINUS                : 18
+MUL                  : 19
+NOT                  : 10
+NUMBER               : 3 16 17 18 19 20
+OR                   : 12
+PLUS                 : 17
+RBRACE               : 1 2
+RFLOWER              : 1
+SEMICOLON            : 1 1 2 2 25 28
+SHORTHAND            : 21
+error                : 
+
+Nonterminals, with rules where they appear
+
+conditions           : 1 2 11 11 12 12
+data                 : 5 6 7 8 9 10 13
+empty                : 27 29
+for_statement        : 26 30 0
+initialization       : 1 2
+iteration            : 1 2
+list                 : 25 28 31
+singleStatement      : 2
+statement            : 23 24
+statements           : 1 23
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . for_statement
+    (1) for_statement -> . FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> . FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement
+
+    FOR             shift and go to state 2
+
+    for_statement                  shift and go to state 1
+
+state 1
+
+    (0) S' -> for_statement .
+
+
+
+state 2
+
+    (1) for_statement -> FOR . LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> FOR . LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement
+
+    LBRACE          shift and go to state 3
+
+
+state 3
+
+    (1) for_statement -> FOR LBRACE . initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> FOR LBRACE . initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement
+    (3) initialization -> . DTYPE ID EQUALS NUMBER
+    (4) initialization -> .
+
+    DTYPE           shift and go to state 5
+    SEMICOLON       reduce using rule 4 (initialization -> .)
+
+    initialization                 shift and go to state 4
+
+state 4
+
+    (1) for_statement -> FOR LBRACE initialization . SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> FOR LBRACE initialization . SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement
+
+    SEMICOLON       shift and go to state 6
+
+
+state 5
+
+    (3) initialization -> DTYPE . ID EQUALS NUMBER
+
+    ID              shift and go to state 7
+
+
+state 6
+
+    (1) for_statement -> FOR LBRACE initialization SEMICOLON . conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> FOR LBRACE initialization SEMICOLON . conditions SEMICOLON iteration RBRACE singleStatement
+    (5) conditions -> . ID EQUALS data
+    (6) conditions -> . ID GREATER data
+    (7) conditions -> . ID LESSER data
+    (8) conditions -> . ID GREATER EQUALS data
+    (9) conditions -> . ID LESSER EQUALS data
+    (10) conditions -> . ID NOT EQUALS data
+    (11) conditions -> . conditions AND conditions
+    (12) conditions -> . conditions OR conditions
+    (13) conditions -> . data
+    (14) conditions -> .
+    (15) data -> . ID
+    (16) data -> . NUMBER
+
+    ID              shift and go to state 9
+    SEMICOLON       reduce using rule 14 (conditions -> .)
+    AND             reduce using rule 14 (conditions -> .)
+    OR              reduce using rule 14 (conditions -> .)
+    NUMBER          shift and go to state 11
+
+    conditions                     shift and go to state 8
+    data                           shift and go to state 10
+
+state 7
+
+    (3) initialization -> DTYPE ID . EQUALS NUMBER
+
+    EQUALS          shift and go to state 12
+
+
+state 8
+
+    (1) for_statement -> FOR LBRACE initialization SEMICOLON conditions . SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> FOR LBRACE initialization SEMICOLON conditions . SEMICOLON iteration RBRACE singleStatement
+    (11) conditions -> conditions . AND conditions
+    (12) conditions -> conditions . OR conditions
+
+    SEMICOLON       shift and go to state 13
+    AND             shift and go to state 14
+    OR              shift and go to state 15
+
+
+state 9
+
+    (5) conditions -> ID . EQUALS data
+    (6) conditions -> ID . GREATER data
+    (7) conditions -> ID . LESSER data
+    (8) conditions -> ID . GREATER EQUALS data
+    (9) conditions -> ID . LESSER EQUALS data
+    (10) conditions -> ID . NOT EQUALS data
+    (15) data -> ID .
+
+    EQUALS          shift and go to state 16
+    GREATER         shift and go to state 17
+    LESSER          shift and go to state 18
+    NOT             shift and go to state 19
+    SEMICOLON       reduce using rule 15 (data -> ID .)
+    AND             reduce using rule 15 (data -> ID .)
+    OR              reduce using rule 15 (data -> ID .)
+
+
+state 10
+
+    (13) conditions -> data .
+
+    SEMICOLON       reduce using rule 13 (conditions -> data .)
+    AND             reduce using rule 13 (conditions -> data .)
+    OR              reduce using rule 13 (conditions -> data .)
+
+
+state 11
+
+    (16) data -> NUMBER .
+
+    SEMICOLON       reduce using rule 16 (data -> NUMBER .)
+    AND             reduce using rule 16 (data -> NUMBER .)
+    OR              reduce using rule 16 (data -> NUMBER .)
+
+
+state 12
+
+    (3) initialization -> DTYPE ID EQUALS . NUMBER
+
+    NUMBER          shift and go to state 20
+
+
+state 13
+
+    (1) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON . iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON . iteration RBRACE singleStatement
+    (17) iteration -> . ID EQUALS ID PLUS NUMBER
+    (18) iteration -> . ID EQUALS ID MINUS NUMBER
+    (19) iteration -> . ID EQUALS ID MUL NUMBER
+    (20) iteration -> . ID EQUALS ID DIV NUMBER
+    (21) iteration -> . ID SHORTHAND
+    (22) iteration -> .
+
+    ID              shift and go to state 22
+    RBRACE          reduce using rule 22 (iteration -> .)
+
+    iteration                      shift and go to state 21
+
+state 14
+
+    (11) conditions -> conditions AND . conditions
+    (5) conditions -> . ID EQUALS data
+    (6) conditions -> . ID GREATER data
+    (7) conditions -> . ID LESSER data
+    (8) conditions -> . ID GREATER EQUALS data
+    (9) conditions -> . ID LESSER EQUALS data
+    (10) conditions -> . ID NOT EQUALS data
+    (11) conditions -> . conditions AND conditions
+    (12) conditions -> . conditions OR conditions
+    (13) conditions -> . data
+    (14) conditions -> .
+    (15) data -> . ID
+    (16) data -> . NUMBER
+
+    ID              shift and go to state 9
+    AND             reduce using rule 14 (conditions -> .)
+    OR              reduce using rule 14 (conditions -> .)
+    SEMICOLON       reduce using rule 14 (conditions -> .)
+    NUMBER          shift and go to state 11
+
+    conditions                     shift and go to state 23
+    data                           shift and go to state 10
+
+state 15
+
+    (12) conditions -> conditions OR . conditions
+    (5) conditions -> . ID EQUALS data
+    (6) conditions -> . ID GREATER data
+    (7) conditions -> . ID LESSER data
+    (8) conditions -> . ID GREATER EQUALS data
+    (9) conditions -> . ID LESSER EQUALS data
+    (10) conditions -> . ID NOT EQUALS data
+    (11) conditions -> . conditions AND conditions
+    (12) conditions -> . conditions OR conditions
+    (13) conditions -> . data
+    (14) conditions -> .
+    (15) data -> . ID
+    (16) data -> . NUMBER
+
+    ID              shift and go to state 9
+    AND             reduce using rule 14 (conditions -> .)
+    OR              reduce using rule 14 (conditions -> .)
+    SEMICOLON       reduce using rule 14 (conditions -> .)
+    NUMBER          shift and go to state 11
+
+    conditions                     shift and go to state 24
+    data                           shift and go to state 10
+
+state 16
+
+    (5) conditions -> ID EQUALS . data
+    (15) data -> . ID
+    (16) data -> . NUMBER
+
+    ID              shift and go to state 25
+    NUMBER          shift and go to state 11
+
+    data                           shift and go to state 26
+
+state 17
+
+    (6) conditions -> ID GREATER . data
+    (8) conditions -> ID GREATER . EQUALS data
+    (15) data -> . ID
+    (16) data -> . NUMBER
+
+    EQUALS          shift and go to state 28
+    ID              shift and go to state 25
+    NUMBER          shift and go to state 11
+
+    data                           shift and go to state 27
+
+state 18
+
+    (7) conditions -> ID LESSER . data
+    (9) conditions -> ID LESSER . EQUALS data
+    (15) data -> . ID
+    (16) data -> . NUMBER
+
+    EQUALS          shift and go to state 30
+    ID              shift and go to state 25
+    NUMBER          shift and go to state 11
+
+    data                           shift and go to state 29
+
+state 19
+
+    (10) conditions -> ID NOT . EQUALS data
+
+    EQUALS          shift and go to state 31
+
+
+state 20
+
+    (3) initialization -> DTYPE ID EQUALS NUMBER .
+
+    SEMICOLON       reduce using rule 3 (initialization -> DTYPE ID EQUALS NUMBER .)
+
+
+state 21
+
+    (1) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration . RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration . RBRACE singleStatement
+
+    RBRACE          shift and go to state 32
+
+
+state 22
+
+    (17) iteration -> ID . EQUALS ID PLUS NUMBER
+    (18) iteration -> ID . EQUALS ID MINUS NUMBER
+    (19) iteration -> ID . EQUALS ID MUL NUMBER
+    (20) iteration -> ID . EQUALS ID DIV NUMBER
+    (21) iteration -> ID . SHORTHAND
+
+    EQUALS          shift and go to state 33
+    SHORTHAND       shift and go to state 34
+
+
+state 23
+
+    (11) conditions -> conditions AND conditions .
+    (11) conditions -> conditions . AND conditions
+    (12) conditions -> conditions . OR conditions
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    SEMICOLON       reduce using rule 11 (conditions -> conditions AND conditions .)
+    AND             shift and go to state 14
+    OR              shift and go to state 15
+
+  ! AND             [ reduce using rule 11 (conditions -> conditions AND conditions .) ]
+  ! OR              [ reduce using rule 11 (conditions -> conditions AND conditions .) ]
+
+
+state 24
+
+    (12) conditions -> conditions OR conditions .
+    (11) conditions -> conditions . AND conditions
+    (12) conditions -> conditions . OR conditions
+
+  ! shift/reduce conflict for AND resolved as shift
+  ! shift/reduce conflict for OR resolved as shift
+    SEMICOLON       reduce using rule 12 (conditions -> conditions OR conditions .)
+    AND             shift and go to state 14
+    OR              shift and go to state 15
+
+  ! AND             [ reduce using rule 12 (conditions -> conditions OR conditions .) ]
+  ! OR              [ reduce using rule 12 (conditions -> conditions OR conditions .) ]
+
+
+state 25
+
+    (15) data -> ID .
+
+    SEMICOLON       reduce using rule 15 (data -> ID .)
+    AND             reduce using rule 15 (data -> ID .)
+    OR              reduce using rule 15 (data -> ID .)
+
+
+state 26
+
+    (5) conditions -> ID EQUALS data .
+
+    SEMICOLON       reduce using rule 5 (conditions -> ID EQUALS data .)
+    AND             reduce using rule 5 (conditions -> ID EQUALS data .)
+    OR              reduce using rule 5 (conditions -> ID EQUALS data .)
+
+
+state 27
+
+    (6) conditions -> ID GREATER data .
+
+    SEMICOLON       reduce using rule 6 (conditions -> ID GREATER data .)
+    AND             reduce using rule 6 (conditions -> ID GREATER data .)
+    OR              reduce using rule 6 (conditions -> ID GREATER data .)
+
+
+state 28
+
+    (8) conditions -> ID GREATER EQUALS . data
+    (15) data -> . ID
+    (16) data -> . NUMBER
+
+    ID              shift and go to state 25
+    NUMBER          shift and go to state 11
+
+    data                           shift and go to state 35
+
+state 29
+
+    (7) conditions -> ID LESSER data .
+
+    SEMICOLON       reduce using rule 7 (conditions -> ID LESSER data .)
+    AND             reduce using rule 7 (conditions -> ID LESSER data .)
+    OR              reduce using rule 7 (conditions -> ID LESSER data .)
+
+
+state 30
+
+    (9) conditions -> ID LESSER EQUALS . data
+    (15) data -> . ID
+    (16) data -> . NUMBER
+
+    ID              shift and go to state 25
+    NUMBER          shift and go to state 11
+
+    data                           shift and go to state 36
+
+state 31
+
+    (10) conditions -> ID NOT EQUALS . data
+    (15) data -> . ID
+    (16) data -> . NUMBER
+
+    ID              shift and go to state 25
+    NUMBER          shift and go to state 11
+
+    data                           shift and go to state 37
+
+state 32
+
+    (1) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE . LFLOWER statements RFLOWER
+    (2) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE . singleStatement
+    (28) singleStatement -> . list SEMICOLON
+    (29) singleStatement -> . empty
+    (30) singleStatement -> . for_statement
+    (31) list -> . ID list
+    (32) list -> . ID
+    (33) empty -> .
+    (1) for_statement -> . FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> . FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    LFLOWER         shift and go to state 38
+    ID              shift and go to state 43
+    $end            reduce using rule 33 (empty -> .)
+    RFLOWER         reduce using rule 33 (empty -> .)
+    FOR             shift and go to state 2
+
+  ! ID              [ reduce using rule 33 (empty -> .) ]
+  ! FOR             [ reduce using rule 33 (empty -> .) ]
+
+    singleStatement                shift and go to state 39
+    list                           shift and go to state 40
+    empty                          shift and go to state 41
+    for_statement                  shift and go to state 42
+
+state 33
+
+    (17) iteration -> ID EQUALS . ID PLUS NUMBER
+    (18) iteration -> ID EQUALS . ID MINUS NUMBER
+    (19) iteration -> ID EQUALS . ID MUL NUMBER
+    (20) iteration -> ID EQUALS . ID DIV NUMBER
+
+    ID              shift and go to state 44
+
+
+state 34
+
+    (21) iteration -> ID SHORTHAND .
+
+    RBRACE          reduce using rule 21 (iteration -> ID SHORTHAND .)
+
+
+state 35
+
+    (8) conditions -> ID GREATER EQUALS data .
+
+    SEMICOLON       reduce using rule 8 (conditions -> ID GREATER EQUALS data .)
+    AND             reduce using rule 8 (conditions -> ID GREATER EQUALS data .)
+    OR              reduce using rule 8 (conditions -> ID GREATER EQUALS data .)
+
+
+state 36
+
+    (9) conditions -> ID LESSER EQUALS data .
+
+    SEMICOLON       reduce using rule 9 (conditions -> ID LESSER EQUALS data .)
+    AND             reduce using rule 9 (conditions -> ID LESSER EQUALS data .)
+    OR              reduce using rule 9 (conditions -> ID LESSER EQUALS data .)
+
+
+state 37
+
+    (10) conditions -> ID NOT EQUALS data .
+
+    SEMICOLON       reduce using rule 10 (conditions -> ID NOT EQUALS data .)
+    AND             reduce using rule 10 (conditions -> ID NOT EQUALS data .)
+    OR              reduce using rule 10 (conditions -> ID NOT EQUALS data .)
+
+
+state 38
+
+    (1) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER . statements RFLOWER
+    (23) statements -> . statements statement
+    (24) statements -> . statement
+    (25) statement -> . list SEMICOLON
+    (26) statement -> . for_statement
+    (27) statement -> . empty
+    (31) list -> . ID list
+    (32) list -> . ID
+    (1) for_statement -> . FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> . FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement
+    (33) empty -> .
+
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    ID              shift and go to state 43
+    FOR             shift and go to state 2
+    RFLOWER         reduce using rule 33 (empty -> .)
+
+  ! ID              [ reduce using rule 33 (empty -> .) ]
+  ! FOR             [ reduce using rule 33 (empty -> .) ]
+
+    statements                     shift and go to state 45
+    statement                      shift and go to state 46
+    list                           shift and go to state 47
+    for_statement                  shift and go to state 48
+    empty                          shift and go to state 49
+
+state 39
+
+    (2) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement .
+
+    $end            reduce using rule 2 (for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement .)
+    RFLOWER         reduce using rule 2 (for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement .)
+    ID              reduce using rule 2 (for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement .)
+    FOR             reduce using rule 2 (for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement .)
+
+
+state 40
+
+    (28) singleStatement -> list . SEMICOLON
+
+    SEMICOLON       shift and go to state 50
+
+
+state 41
+
+    (29) singleStatement -> empty .
+
+    $end            reduce using rule 29 (singleStatement -> empty .)
+    RFLOWER         reduce using rule 29 (singleStatement -> empty .)
+    ID              reduce using rule 29 (singleStatement -> empty .)
+    FOR             reduce using rule 29 (singleStatement -> empty .)
+
+
+state 42
+
+    (30) singleStatement -> for_statement .
+
+    $end            reduce using rule 30 (singleStatement -> for_statement .)
+    RFLOWER         reduce using rule 30 (singleStatement -> for_statement .)
+    ID              reduce using rule 30 (singleStatement -> for_statement .)
+    FOR             reduce using rule 30 (singleStatement -> for_statement .)
+
+
+state 43
+
+    (31) list -> ID . list
+    (32) list -> ID .
+    (31) list -> . ID list
+    (32) list -> . ID
+
+    SEMICOLON       reduce using rule 32 (list -> ID .)
+    ID              shift and go to state 43
+
+    list                           shift and go to state 51
+
+state 44
+
+    (17) iteration -> ID EQUALS ID . PLUS NUMBER
+    (18) iteration -> ID EQUALS ID . MINUS NUMBER
+    (19) iteration -> ID EQUALS ID . MUL NUMBER
+    (20) iteration -> ID EQUALS ID . DIV NUMBER
+
+    PLUS            shift and go to state 52
+    MINUS           shift and go to state 53
+    MUL             shift and go to state 54
+    DIV             shift and go to state 55
+
+
+state 45
+
+    (1) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements . RFLOWER
+    (23) statements -> statements . statement
+    (25) statement -> . list SEMICOLON
+    (26) statement -> . for_statement
+    (27) statement -> . empty
+    (31) list -> . ID list
+    (32) list -> . ID
+    (1) for_statement -> . FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER
+    (2) for_statement -> . FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE singleStatement
+    (33) empty -> .
+
+  ! shift/reduce conflict for RFLOWER resolved as shift
+  ! shift/reduce conflict for ID resolved as shift
+  ! shift/reduce conflict for FOR resolved as shift
+    RFLOWER         shift and go to state 56
+    ID              shift and go to state 43
+    FOR             shift and go to state 2
+
+  ! RFLOWER         [ reduce using rule 33 (empty -> .) ]
+  ! ID              [ reduce using rule 33 (empty -> .) ]
+  ! FOR             [ reduce using rule 33 (empty -> .) ]
+
+    statement                      shift and go to state 57
+    list                           shift and go to state 47
+    for_statement                  shift and go to state 48
+    empty                          shift and go to state 49
+
+state 46
+
+    (24) statements -> statement .
+
+    RFLOWER         reduce using rule 24 (statements -> statement .)
+    ID              reduce using rule 24 (statements -> statement .)
+    FOR             reduce using rule 24 (statements -> statement .)
+
+
+state 47
+
+    (25) statement -> list . SEMICOLON
+
+    SEMICOLON       shift and go to state 58
+
+
+state 48
+
+    (26) statement -> for_statement .
+
+    RFLOWER         reduce using rule 26 (statement -> for_statement .)
+    ID              reduce using rule 26 (statement -> for_statement .)
+    FOR             reduce using rule 26 (statement -> for_statement .)
+
+
+state 49
+
+    (27) statement -> empty .
+
+    RFLOWER         reduce using rule 27 (statement -> empty .)
+    ID              reduce using rule 27 (statement -> empty .)
+    FOR             reduce using rule 27 (statement -> empty .)
+
+
+state 50
+
+    (28) singleStatement -> list SEMICOLON .
+
+    $end            reduce using rule 28 (singleStatement -> list SEMICOLON .)
+    RFLOWER         reduce using rule 28 (singleStatement -> list SEMICOLON .)
+    ID              reduce using rule 28 (singleStatement -> list SEMICOLON .)
+    FOR             reduce using rule 28 (singleStatement -> list SEMICOLON .)
+
+
+state 51
+
+    (31) list -> ID list .
+
+    SEMICOLON       reduce using rule 31 (list -> ID list .)
+
+
+state 52
+
+    (17) iteration -> ID EQUALS ID PLUS . NUMBER
+
+    NUMBER          shift and go to state 59
+
+
+state 53
+
+    (18) iteration -> ID EQUALS ID MINUS . NUMBER
+
+    NUMBER          shift and go to state 60
+
+
+state 54
+
+    (19) iteration -> ID EQUALS ID MUL . NUMBER
+
+    NUMBER          shift and go to state 61
+
+
+state 55
+
+    (20) iteration -> ID EQUALS ID DIV . NUMBER
+
+    NUMBER          shift and go to state 62
+
+
+state 56
+
+    (1) for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER .
+
+    $end            reduce using rule 1 (for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER .)
+    RFLOWER         reduce using rule 1 (for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER .)
+    ID              reduce using rule 1 (for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER .)
+    FOR             reduce using rule 1 (for_statement -> FOR LBRACE initialization SEMICOLON conditions SEMICOLON iteration RBRACE LFLOWER statements RFLOWER .)
+
+
+state 57
+
+    (23) statements -> statements statement .
+
+    RFLOWER         reduce using rule 23 (statements -> statements statement .)
+    ID              reduce using rule 23 (statements -> statements statement .)
+    FOR             reduce using rule 23 (statements -> statements statement .)
+
+
+state 58
+
+    (25) statement -> list SEMICOLON .
+
+    RFLOWER         reduce using rule 25 (statement -> list SEMICOLON .)
+    ID              reduce using rule 25 (statement -> list SEMICOLON .)
+    FOR             reduce using rule 25 (statement -> list SEMICOLON .)
+
+
+state 59
+
+    (17) iteration -> ID EQUALS ID PLUS NUMBER .
+
+    RBRACE          reduce using rule 17 (iteration -> ID EQUALS ID PLUS NUMBER .)
+
+
+state 60
+
+    (18) iteration -> ID EQUALS ID MINUS NUMBER .
+
+    RBRACE          reduce using rule 18 (iteration -> ID EQUALS ID MINUS NUMBER .)
+
+
+state 61
+
+    (19) iteration -> ID EQUALS ID MUL NUMBER .
+
+    RBRACE          reduce using rule 19 (iteration -> ID EQUALS ID MUL NUMBER .)
+
+
+state 62
+
+    (20) iteration -> ID EQUALS ID DIV NUMBER .
+
+    RBRACE          reduce using rule 20 (iteration -> ID EQUALS ID DIV NUMBER .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for AND in state 23 resolved as shift
+WARNING: shift/reduce conflict for OR in state 23 resolved as shift
+WARNING: shift/reduce conflict for AND in state 24 resolved as shift
+WARNING: shift/reduce conflict for OR in state 24 resolved as shift
+WARNING: shift/reduce conflict for ID in state 32 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 32 resolved as shift
+WARNING: shift/reduce conflict for ID in state 38 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 38 resolved as shift
+WARNING: shift/reduce conflict for RFLOWER in state 45 resolved as shift
+WARNING: shift/reduce conflict for ID in state 45 resolved as shift
+WARNING: shift/reduce conflict for FOR in state 45 resolved as shift
